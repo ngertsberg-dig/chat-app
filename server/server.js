@@ -9,6 +9,9 @@ app.use(express.json());
 
 app.use("/api",apiRouter);
 
+app.get("/",(req,res)=>{
+    res.send("Hello World");
+})
 io.on("connection",(socket)=>{
     console.log("a user connected");
     socket.on("disconnect",()=>{
