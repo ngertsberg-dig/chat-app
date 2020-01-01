@@ -3,6 +3,7 @@ const app = express();
 const apiRouter = require("./routes/apiRoute");
 const http = require("http").createServer(app);
 const io = require("socket.io")(http);
+const port = process.env.PORT || 8080;
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
@@ -21,6 +22,6 @@ io.on("connection",(socket)=>{
         io.emit("message recieve",msg);
     })
 })
-http.listen("8080",function(){
-    console.log("listening on port 8080");
+http.listen(port,function(){
+    console.log(`listening on port ${port}`);
 })
