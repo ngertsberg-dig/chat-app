@@ -6,6 +6,8 @@ import MessageBoard from './components/MessageBoard';
 import socketIOClient from 'socket.io-client'
 class App extends React.Component{
   constructor(){
+    console.log(process.env.NODE_ENV)
+    console.log(process.env.port)
     super();
     this.state={
       endpoint:"localhost:8080"
