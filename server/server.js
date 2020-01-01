@@ -5,16 +5,17 @@ const http = require("http").createServer(app);
 const io = require("socket.io")(http);
 const port = process.env.PORT || 8080;
 const path = require("path");
-
+console.log(port)
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 app.use("/api",apiRouter);
 
-app.use(express.static(path.join(__dirname, '../client/build')));
+//app.use(express.static(path.join(__dirname, '../client/build')));
 
 app.get("/",(req,res)=>{
-    res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+    res.json({test:port})
+    //res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
 })
 
 io.on("connection",(socket)=>{
