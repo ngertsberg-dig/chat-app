@@ -8,6 +8,7 @@
     "server": "cd server && node server.js",
     "client": "cd client && npm start",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "test-prod":"cd server && node server.js",
     "heroku-postbuild": "cd client && npm install && npm run build"  
   },
   "repository": {
