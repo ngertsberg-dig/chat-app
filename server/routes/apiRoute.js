@@ -10,4 +10,15 @@ router.get('/getPort',(req,res)=>{
     res.json({ port })
 })
 
+router.post('/setNickname',(req,res)=>{
+    const { nickname } = req.body;
+    req.session.nickname = nickname;
+    res.json({ nickname })
+    
+    
+})
+
+router.get('/testSession',(req,res)=>{
+    console.log(req.session)
+})
 module.exports = router;
