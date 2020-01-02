@@ -4,6 +4,7 @@ import './App.css';
 import SendMessage from './components/SendMessage';
 import MessageBoard from './components/MessageBoard';
 import ChooseNickname from './components/ChooseNickname';
+import DarkModeButton from './components/DarkModeButton';
 import socketIOClient from 'socket.io-client'
 class App extends React.Component{
   constructor(){
@@ -63,10 +64,26 @@ class App extends React.Component{
       
     }else{alert("enter a nickname")}
   }
+  darkModeClick(e){
+    const button = e.target;
+    const activateDarkMode = (e) =>{
+      e.target.classList.add("active");
+      e.target.textContent = "Light Mode";
+      document.querySelector("html").classList.add("darkMode");
+    }
+    const deactivateDarkMode = (e) =>{
+      e.target.classList.remove("active");
+      e.target.textContent = "Dark Mode";
+      document.querySelector("html").classList.remove("darkMode");
+    }
+
+    e.target.classList.contains("active") === true ? deactivateDarkMode(e) : activateDarkMode(e)
+  }
   render(){
     
     return (
       <div className="App">
+        <DarkModeButton click = {(e)=>this.darkModeClick(e)}/>
         <ChooseNickname click = {(e)=>this.setNickname(e)}/>
         <MessageBoard />
         <SendMessage click = {(e)=>this.sendMessage(e)} />
