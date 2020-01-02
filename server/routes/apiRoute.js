@@ -5,4 +5,9 @@ router.get("/",(req,res)=>{
     res.json(json)
 })
 
+router.get('/getPort',(req,res)=>{
+    const port = process.env.PORT || 8080;
+    res.json({ port })
+})
+
 module.exports = router;

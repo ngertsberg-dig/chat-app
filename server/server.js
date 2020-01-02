@@ -11,11 +11,10 @@ app.use(express.json());
 
 app.use("/api",apiRouter);
 
-//app.use(express.static(path.join(__dirname, '../client/build')));
+app.use(express.static(path.join(__dirname, '../client/build')));
 
 app.get("/",(req,res)=>{
-    res.json({test:port})
-    //res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+    res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
 })
 
 io.on("connection",(socket)=>{
