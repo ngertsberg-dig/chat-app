@@ -15,7 +15,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(session(sess));
 app.use("/api",apiRouter);
-
 app.use(express.static(path.join(__dirname, '../client/build')));
 
 app.get("/",(req,res)=>{
