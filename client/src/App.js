@@ -42,12 +42,19 @@ class App extends React.Component{
       var d = new Date();
       var n = d.toLocaleTimeString();
       console.log(`message recieved: ${msg}`);
-      messageBoard.innerHTML += `<li class = 'message'><p class = 'date'>${n}</p><p class = 'message-text'>${nickname}: ${msg}</p></li>`;
+      messageBoard.innerHTML += `<li class = 'message'><p class = 'date'>${n}</p><div class='profile-pic'><img src = ${this.state.profilePic} alt = 'profile pic'></div><p class = 'message-text'>${nickname}: ${msg}</p></li>`;
     })
   }
   async setNickname(e){
     e.preventDefault();
     const nickname = document.querySelector("#chooseNicknameForm input[type='text']").value;
+    let profilePic = document.querySelector("#chooseNicknameForm input[type='file']");
+    let statePic;
+    if(profilePic.files.length == 0){
+      statePic = 'http://placehold.it/100x100';
+    }else{
+      statePic = URL.createObjectURL(profilePic.files[0]);
+    }
     if(nickname != ''){
       const getNickname = await fetch("/api/setNickname",
       {
@@ -58,9 +65,10 @@ class App extends React.Component{
         },
         body:JSON.stringify({ nickname })
       }).then(res=>res.json());
-      this.setState({ nickName : getNickname.nickname });
+      this.setState({ nickName : getNickname.nickname, profilePic: statePic});
       this.state.socket.emit('username set', getNickname.nickname);
       document.querySelector("#chooseNickname").remove();
+      window.pic = profilePic;
       
     }else{alert("enter a nickname")}
   }
